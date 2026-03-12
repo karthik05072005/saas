@@ -190,7 +190,7 @@ export function InvoiceDetails() {
                                             <span>-₹{invoice.totalDiscount.toLocaleString()}</span>
                                         </div>
                                     )}
-                                    <div className="flex justify-between font-extrabold text-xl text-teal-900 pt-4 border-t border-slate-200">
+                                    <div className="flex justify-between font-extrabold text-xl text-blue-900 pt-4 border-t border-slate-200">
                                         <span>Total</span>
                                         <span>₹{invoice.grandTotal.toLocaleString()}</span>
                                     </div>
@@ -265,7 +265,7 @@ export function InvoiceDetails() {
 
                     {/* Notes Card */}
                     {invoice.notes && (
-                        <Card className="border-slate-200 bg-teal-50/30 border-dashed">
+                        <Card className="border-slate-200 bg-blue-50/30 border-dashed">
                             <CardContent className="p-4">
                                 <p className="text-[10px] uppercase tracking-wider text-blue-600 font-bold mb-2">Notes</p>
                                 <p className="text-xs text-slate-600 italic">"{invoice.notes}"</p>

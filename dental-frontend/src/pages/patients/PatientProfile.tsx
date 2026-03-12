@@ -44,7 +44,7 @@ export function PatientProfile() {
                     <CardContent className="p-6">
                         <div className="flex justify-between items-start mb-4">
                             <h3 className="font-semibold text-lg">Contact Info</h3>
-                            <Badge variant="outline" className="bg-teal-50 text-blue-700">{patient.status}</Badge>
+                            <Badge variant="outline" className="bg-blue-50 text-blue-700">{patient.status}</Badge>
                         </div>
                         <div className="space-y-3 text-sm">
                             <div className="flex items-center gap-3 text-slate-600">
@@ -86,7 +86,7 @@ export function PatientProfile() {
                                 <CardContent className="p-6">
                                     <h4 className="font-medium mb-4">Treatment Timeline</h4>
                                     <div className="space-y-6">
-                                        <div className="relative pl-6 border-l-2 border-teal-100 pb-2">
+                                        <div className="relative pl-6 border-l-2 border-blue-100 pb-2">
                                             <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-4 border-white bg-blue-500"></span>
                                             <span className="text-sm text-slate-500 font-medium">{patient.lastVisit} • Dr. Smith</span>
                                             <h5 className="font-semibold text-slate-900 mt-1">Routine Scaling & Polishing</h5>

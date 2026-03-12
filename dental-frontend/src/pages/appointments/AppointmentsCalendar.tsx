@@ -729,7 +729,7 @@ export function AppointmentsCalendar() {
                                                 </div>
                                             ) : (
                                                 <div className="flex gap-2">
-                                                    <Button variant="outline" size="sm" onClick={startCamera} className="flex-1 border-dashed border-2 hover:border-blue-400 hover:bg-teal-50">
+                                                    <Button variant="outline" size="sm" onClick={startCamera} className="flex-1 border-dashed border-2 hover:border-blue-400 hover:bg-blue-50">
                                                         <Camera className="h-4 w-4 mr-2 text-blue-600" /> Webcam
                                                     </Button>
                                                     <div className="relative flex-1">
@@ -1042,7 +1042,7 @@ export function AppointmentsCalendar() {
                                         <CalendarIcon className="h-5 w-5" />
                                         Appointment Details
                                     </DialogTitle>
-                                    <p className="text-teal-100 text-sm mt-1">
+                                    <p className="text-blue-100 text-sm mt-1">
                                         {format(new Date(selectedAppointment.date), 'EEEE, MMMM d, yyyy')}
                                     </p>
                                 </DialogHeader>
@@ -1098,7 +1098,7 @@ export function AppointmentsCalendar() {
                                     ))}
                                     {selectedAppointment.tokenNumber && (
                                         <div className="flex items-center gap-3">
-                                            <div className="w-7 h-7 rounded-full bg-teal-50 flex items-center justify-center flex-shrink-0">
+                                            <div className="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
                                                 <span className="text-xs font-bold text-blue-600">#</span>
                                             </div>
                                             <div>

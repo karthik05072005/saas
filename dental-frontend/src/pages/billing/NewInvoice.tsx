@@ -217,7 +217,7 @@ export function NewInvoice() {
                                 variant="outline" 
                                 size="sm" 
                                 onClick={addLineItem}
-                                className="bg-white border-teal-200 text-blue-700 hover:bg-teal-50 hover:border-teal-300 font-medium"
+                                className="bg-white border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 font-medium"
                             >
                                 <Plus className="mr-2 h-4 w-4" /> Add Item
                             </Button>
@@ -329,7 +329,7 @@ export function NewInvoice() {
                                         ₹{totals.taxAmount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
                                     </span>
                                 </div>
-                                <div className="pt-4 border-t-2 border-slate-200 flex justify-between font-extrabold text-2xl text-teal-900">
+                                <div className="pt-4 border-t-2 border-slate-200 flex justify-between font-extrabold text-2xl text-blue-900">
                                     <span>Grand Total</span>
                                     <span>₹{totals.total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                                 </div>

@@ -428,7 +428,7 @@ function LabCasesTab() {
             SENT: 'bg-blue-100 text-blue-800',
             IN_PROGRESS: 'bg-amber-100 text-amber-800',
             RECEIVED: 'bg-green-100 text-green-800',
-            FITTED: 'bg-teal-100 text-teal-800',
+            FITTED: 'bg-blue-100 text-blue-800',
             CANCELLED: 'bg-red-100 text-red-800',
         };
         return <Badge className={`${styles[status] ?? 'bg-slate-100 text-slate-700'} hover:opacity-90 text-xs border-none`}>{status.replace('_', ' ')}</Badge>;

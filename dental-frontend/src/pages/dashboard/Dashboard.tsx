@@ -198,7 +198,7 @@ export function Dashboard() {
                                 return (
                                     <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-100">
                                         <div className="flex items-center gap-4">
-                                            <div className="bg-teal-100 text-teal-800 text-sm font-semibold px-3 py-1 rounded-md min-w-[85px] text-center">{time}</div>
+                                            <div className="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-md min-w-[85px] text-center">{time}</div>
                                             <div>
                                                 <p className="text-sm font-semibold text-slate-900">{patientName}</p>
                                                 <p className="text-xs text-slate-500">{procedure} • {doctor}</p>
