@@ -56,6 +56,7 @@ export class UsersService {
         ],
       } as any)
       .select('name email role doctorProfile')
-      .exec();
+      .lean()
+      .exec() as any;
   }
 }

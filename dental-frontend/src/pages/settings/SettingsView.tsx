@@ -412,8 +412,8 @@ function DoctorsTab() {
                         </div>
                     )}
 
-                    <div className="grid gap-4">
-                        <div className="space-y-1.5">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="col-span-2 space-y-1.5">
                             <label className="text-sm font-medium">Full Name <span className="text-red-500">*</span></label>
                             <Input
                                 value={form.name}
@@ -444,7 +444,6 @@ function DoctorsTab() {
                                 placeholder="Min 8 characters"
                                 className="bg-slate-50"
                             />
-                            <p className="text-xs text-slate-400">The doctor will use this to log in to DentalCloud.</p>
                         </div>
 
                         <div className="space-y-1.5">

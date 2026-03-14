@@ -138,7 +138,7 @@ export class BillingService {
     return this.procedureModel.find({
       tenantId: new Types.ObjectId(tenantId),
       isActive: true,
-    } as any);
+    } as any).lean().exec();
   }
 
   async updateProcedure(
