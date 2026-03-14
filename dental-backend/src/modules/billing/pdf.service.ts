@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { join } from 'path';
+import * as fs from 'fs';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const PDFDocument = require('pdfkit');
 
@@ -62,10 +63,13 @@ export class PdfService {
         try {
           const regular = join(basePath, 'Roboto-Regular.ttf');
           const bold = join(basePath, 'Roboto-Bold.ttf');
-          doc.registerFont('Roboto', regular);
-          doc.registerFont('Roboto-Bold', bold);
-          registered = true;
-          break;
+
+          if (fs.existsSync(regular) && fs.existsSync(bold)) {
+            doc.registerFont('Roboto', regular);
+            doc.registerFont('Roboto-Bold', bold);
+            registered = true;
+            break;
+          }
         } catch { /* try next */ }
       }
 
