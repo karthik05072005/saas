@@ -1,6 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { join } from 'path';
-import * as fs from 'fs';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const PDFDocument = require('pdfkit');
 
@@ -49,38 +47,9 @@ export class PdfService {
       doc.on('end', () => resolve(Buffer.concat(chunks)));
       doc.on('error', reject);
 
-      // Register Fonts for Rupee Support
-      // Try multiple potential asset paths for robustness in different environments (Local vs Vercel)
-      const potentialPaths = [
-        join(process.cwd(), 'src/assets/fonts'),           // Dev / Local
-        join(process.cwd(), 'assets/fonts'),               // Vercel / Dist
-        join(__dirname, '../../../assets/fonts'),          // Relative from src/modules/billing
-        join(__dirname, '../../assets/fonts'),             // Relative from dist/modules/billing
-      ];
-
-      let registered = false;
-      for (const basePath of potentialPaths) {
-        try {
-          const regular = join(basePath, 'Roboto-Regular.ttf');
-          const bold = join(basePath, 'Roboto-Bold.ttf');
-
-          if (fs.existsSync(regular) && fs.existsSync(bold)) {
-            const regularBuffer = fs.readFileSync(regular);
-            const boldBuffer = fs.readFileSync(bold);
-            doc.registerFont('Roboto', regularBuffer);
-            doc.registerFont('Roboto-Bold', boldBuffer);
-            registered = true;
-            break;
-          }
-        } catch { /* try next */ }
-      }
-
-      if (!registered) {
-        this.logger.warn('Custom fonts not found. Rupee symbol may not render correctly.');
-      }
-
-      const fontRegular = registered ? 'Roboto' : 'Helvetica';
-      const fontBold = registered ? 'Roboto-Bold' : 'Helvetica-Bold';
+      // Standard Fonts for Vercel Serverless Reliability
+      const fontRegular = 'Helvetica';
+      const fontBold = 'Helvetica-Bold';
 
       // Colors
       const primaryColor = '#0D9488'; // Teal-600
@@ -187,9 +156,9 @@ export class PdfService {
 
         doc.text(item.description, 50, itemY, { width: 220 });
         doc.text(String(item.quantity), 280, itemY, { width: 40, align: 'center' });
-        doc.text(`₹${item.unitPrice.toFixed(2)}`, 330, itemY, { width: 70, align: 'right' });
-        doc.text(`₹${item.taxAmount.toFixed(2)}`, 410, itemY, { width: 60, align: 'right' });
-        doc.text(`₹${item.totalAmount.toFixed(2)}`, 480, itemY, { width: 65, align: 'right' });
+        doc.text(`Rs. ${item.unitPrice.toFixed(2)}`, 330, itemY, { width: 70, align: 'right' });
+        doc.text(`Rs. ${item.taxAmount.toFixed(2)}`, 410, itemY, { width: 60, align: 'right' });
+        doc.text(`Rs. ${item.totalAmount.toFixed(2)}`, 480, itemY, { width: 65, align: 'right' });
 
         itemY += 25;
       }
@@ -203,15 +172,15 @@ export class PdfService {
         .font(fontRegular)
         .fillColor(secondaryColor)
         .text('Subtotal:', colX, summaryY)
-        .text(`₹${data.subtotal.toFixed(2)}`, 480, summaryY, { align: 'right' });
+        .text(`Rs. ${data.subtotal.toFixed(2)}`, 480, summaryY, { align: 'right' });
 
       doc
         .text('Discount:', colX, summaryY + 20)
-        .text(`-₹${data.totalDiscount.toFixed(2)}`, 480, summaryY + 20, { align: 'right' });
+        .text(`-Rs. ${data.totalDiscount.toFixed(2)}`, 480, summaryY + 20, { align: 'right' });
 
       doc
         .text('GST (18%):', colX, summaryY + 40)
-        .text(`₹${data.totalTax.toFixed(2)}`, 480, summaryY + 40, { align: 'right' });
+        .text(`Rs. ${data.totalTax.toFixed(2)}`, 480, summaryY + 40, { align: 'right' });
 
       doc
         .rect(340, summaryY + 60, 215, 35)
@@ -222,7 +191,7 @@ export class PdfService {
         .fontSize(14)
         .font(fontBold)
         .text('Grand Total:', colX, summaryY + 70)
-        .text(`₹${data.grandTotal.toFixed(2)}`, 450, summaryY + 70, { align: 'right', width: 95 });
+        .text(`Rs. ${data.grandTotal.toFixed(2)}`, 450, summaryY + 70, { align: 'right', width: 95 });
 
       // ── Payments ──────────────────────────────────────────────────────
       if (data.payments.length > 0) {
@@ -235,7 +204,7 @@ export class PdfService {
         let py = summaryY + 20;
         doc.fontSize(8).font(fontRegular).fillColor(secondaryColor);
         for (const p of data.payments) {
-          doc.text(`${p.paidAt} — ${p.mode} — ₹${p.amount.toFixed(2)}`, 40, py);
+          doc.text(`${p.paidAt} — ${p.mode} — Rs. ${p.amount.toFixed(2)}`, 40, py);
           py += 15;
         }
       }
