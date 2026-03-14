@@ -493,7 +493,7 @@ export function AppointmentsCalendar() {
                 if (!open) resetForm();
                 setIsBookingDialogOpen(open);
             }}>
-                <DialogContent className="sm:max-w-[520px] max-h-[92vh] overflow-hidden p-0 gap-0 flex flex-col">
+                <DialogContent aria-describedby={undefined} className="sm:max-w-[520px] max-h-[92vh] overflow-hidden p-0 gap-0 flex flex-col">
 
                     {/* SUCCESS STATE */}
                     {bookingSuccess ? (

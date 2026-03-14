@@ -46,14 +46,13 @@ export class StorageService {
     const filePath = `${tenantId}/${folder}/${timestamp}-${fileName}`;
 
     if (!this.storage) {
-      this.logger.warn(`Local storage mode for: ${filePath}`);
-      const dir = `uploads/${tenantId}/${folder}`;
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-      fs.writeFileSync(`${dir}/${timestamp}-${fileName}`, buffer);
-      const baseUrl = this.configService.get<string>('BACKEND_URL') || 'http://localhost:3001';
-      return `${baseUrl}/uploads/${filePath}`;
+      this.logger.warn(`Local storage mode: generating Base64 URI for ${filePath}`);
+      
+      // On Vercel, writing to disk causes EROFS (Read-only file system) error.
+      // Since GCP is not configured, we return a Data URI so the image still
+      // works instantly on the frontend without needing a real cloud bucket!
+      const base64Data = buffer.toString('base64');
+      return `data:${mimeType};base64,${base64Data}`;
     }
 
     const bucket = this.storage.bucket(this.bucketName);
